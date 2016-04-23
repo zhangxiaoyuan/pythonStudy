@@ -2,7 +2,7 @@
 2、__xxx    双下划线的表示的是私有类型的变量。只能是允许这个类本身进行访问了。连子类也不可以
 3、__xxx___ 定义的是特列方法。像__init__之类的
 
-
+python保留字：
 and	 exec	not
 assert	finally	or
 break	for	pass
@@ -19,3 +19,12 @@ IndentationError: unexpected indent 错误是python编译器是在告诉你"Hi�
 如果是 IndentationError: unindent does not match any outer indentation level错误表明，你使用的缩进方式不一致，有的是 tab 键缩进，有的是空格缩进，改为一致即可。
 因此，在Python的代码块中必须使用相同数目的行首缩进空格数。
 建议你在每个缩进层次使用 单个制表符 或 两个空格 或 四个空格 , 切记不能混用
+
+
+Python支持四种不同的数字类型：
+int（有符号整型）
+long（长整型[也可以代表八进制和十六进制]）
+float（浮点型）
+complex（复数）
+
+长整型也可以使用小写"L"，但是还是建议您使用大写"L"，避免与数字"1"混淆。Python使用"L"来显示长整型

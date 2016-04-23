@@ -3,7 +3,7 @@
 3、__xxx___ 定义的是特列方法。像__init__之类的
 
 
-and	exec	not
+and	 exec	not
 assert	finally	or
 break	for	pass
 class	from	print

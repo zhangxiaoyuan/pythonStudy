@@ -91,4 +91,4 @@ oct(x)
 
 
 优先级：
-http://github.com/zhangxiaoyuan/pythonStudy/raw/master/images-folder/calcPri.png
+![image]http://github.com/zhangxiaoyuan/pythonStudy/raw/master/images-folder/calcPri.png

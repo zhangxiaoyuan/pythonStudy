@@ -88,3 +88,7 @@ hex(x)
 将一个整数转换为一个十六进制字符串
 oct(x)
 将一个整数转换为一个八进制字符串
+
+
+优先级：
+http://github.com/zhangxiaoyuan/pythonStudy/raw/master/images-folder/calcPri.png

@@ -11,5 +11,5 @@ print list[:5]
 print list[2:4] 
 del list[1] 
 print list 
- print list[1]
+print list[1]
 

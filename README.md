@@ -1,6 +1,6 @@
 # pythonStudy
 
-this is a project that study python.Make some notes and code.
+This project is for python study.Make some notes and code.
 
 this is master main branch
 

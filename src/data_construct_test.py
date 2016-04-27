@@ -1,4 +1,3 @@
-
 #!usr/bin/env python
 #coding=utf-8
 
@@ -42,3 +41,20 @@ tuple = (4,5,6,'7')
 #function for list&tupl
 list.sort()
 print list
+
+#元组，元组的其他用法和列表一样，只不过元组不能修改元素
+tup = (1)  #元组只有一个元素时，需要在末尾添加逗号(,)，否则就会被默认为一个数字
+tup1 = (1,)
+print tup
+print tup1
+
+tup2= (1,2,3,)
+tup3= (4,5,6,'7')
+tup3 = tup2 + tup3
+tup4 = tup2 + tup3
+print tup2
+print tup3
+#i组不允许删除单个元素，但是可以删除整个元组rint tup4
+#
+#del tup2[0]
+print tup2

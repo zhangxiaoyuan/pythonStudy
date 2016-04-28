@@ -58,3 +58,18 @@ print tup3
 #
 #del tup2[0]
 print tup2
+
+#字典中键值必须是不可变值，因此可以是数字，字符，元组，单不能是列表，因为列表的值可以被修改
+dic = {1:"1", 2:'abc', 'd':"3", 4:5}
+print dic
+print dic[1]
+del dic[2]
+print dic
+dic.clear()
+print dic
+del dic ##删除就为空
+#print dic
+
+#字典中不允许有重复键值，如果键值重复，则后面的值会覆盖前面值
+dic1={1:1,2:2,1:3}
+print dic1

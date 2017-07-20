@@ -65,6 +65,67 @@ bool()函数其他类型转化为布尔型，bool(1) bool('')
 - **组合参数**：参数定义的顺序必须是：必选参数、默认参数、可变参数、命名关键字参数和关键字参数
 **对于任意函数，都可以通过类似func(\*args, \*\*kw)的形式调用它，无论它的参数是如何定义的**
 
+#### 11.python高级特性：
+- **切片slice**：
+```python:
+ listq = [1,4,5,6,7,8,9,0]
+ listp = range(0, 100, 5)
+ tupleq1 = (9,8,7,6,5,4,3,2,1)
+ print(listq[0:5])
+ print(listq[:7])
+ print(listq[1:5:2])
+ print(listp[-1])
+ print(list(listp[-5:-1]))
+ print(tupleq1[-3:])
+ print(tupleq1[-5:-1:2])
+ print(tupleq1[:6:3])
+ print(list(listp[::5]))
+ print(tupleq1[:])
+ print((1,2,3,4,5,6,7,8)[2:5:1])
+ print([9,8,7,6,5,4,3,2,1][-8::2])
+ print('abcdefghi'[::2])
+```
+
+#### 12.列表生成式：
+写列表生成式时，把要生成的元素x * x放到前面，后面跟for循环，就可以把list创建出来  
+
+```python
+>>> [x * x for x in range(1, 11) if x % 2 == 0]
+[4, 16, 36, 64, 100]
+```
+
+#### 13.生成器：
+在Python中，这种一边循环一边计算的机制，称为生成器：generator    
+要创建一个generator，有很多种方法。第一种方法很简单，只要把一个列表生成式的[]改成()，就创建了一个generator：
+
+```python
+ >>> L = [x * x for x in range(10)]
+ >>> L
+ [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+ >>> g = (x * x for x in range(10))
+ >>> g
+ <generator object <genexpr> at 0x1022ef630>
+```
+这就是定义generator的另一种方法。如果一个函数定义中包含yield关键字，那么这个函数就不再是一个普通函数，而是一个generator
+
+```python
+ def fib(max):
+    n, a, b = 0, 0, 1
+    while n < max:
+        yield b
+        a, b = b, a + b
+        n = n + 1
+    return 'done'
+```
+
+#### 14.迭代器：
+凡是可作用于for循环的对象都是Iterable类型；   
+
+凡是可作用于next()函数的对象都是Iterator类型，它们表示一个惰性计算的序列；   
+
+集合数据类型如list、dict、str等是Iterable但不是Iterator，不过可以通过iter()函数获得一个Iterator对象。   
+
+Python的for循环本质上就是通过不断调用next()函数实现的，
 
 #### .尾递归优化：
 Python中可以写（尾递归）：尾递归是把变化的参数传递给递归函数的变量了。
@@ -84,3 +145,10 @@ Python中可以写（尾递归）：尾递归是把变化的参数传递给递�
 |  function name                |     description                                                         |
 |:------------------------------|------------------------------------------------------------------------:|
 |    isinstance()               |     数据类型检查    例：if not isinstance(x, (int, float)):              |
+|    range(start, end, step)    |     根据step生成一个start到end-1的list,例： range(1,5,2) [1,3,5]          |
+|      dict.values()            |     获取字典中所有value值组成的list 返回结果：dict_values([1, 2, 3])       |
+|      dict.items()             |     获取字典中的所有key-value组成list 返回结果：dict_items([('a', 1), ('b', 2), ('c', 3)])　｜
+|　 isinstance(value, Iterable) |     判断value是否可迭代，例：isinstance("stringvalue", Iterable) True    |
+|   enumerate(list)             |     把一个list变成索引-元素对                                             |
+|      os.listdir('.')          |     列出当前路径下所有文件名称                                             |
+|      iter()                   |     把list、dict、str等Iterable变成Iterator                               |

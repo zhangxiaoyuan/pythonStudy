@@ -77,7 +77,7 @@ Python中可以写（尾递归）：尾递归是把变化的参数传递给递�
      return tailrecsum(x - 1, running_total + x)
      
   def fact(n):
-   return tailrecsum(n, 1)
+   return tailrecsum(n)
 ```
 
 #### .常用函数：

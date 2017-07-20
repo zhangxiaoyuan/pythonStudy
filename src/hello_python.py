@@ -229,3 +229,158 @@ print(nx, ny)
 
 realTuple = return_more_val(100, 100, 60, math.pi / 6)
 print(realTuple)
+
+
+#函数默认参数的坑
+def add_end(L=[]):
+	L.append("end")
+	return L
+
+l1 = [1,2,3]
+l2 = [1, '2', "3"]
+print(add_end(l1))
+print(add_end(l2))
+
+print(add_end())
+print(add_end())
+print(add_end())
+
+
+def add_end1(L=None):
+	if L is None:
+		L = []
+	else:
+		L.append("end")
+
+	return L
+
+print(add_end1())
+print(add_end1())
+print(add_end1())
+
+print(add_end1([1,2,3]))
+
+#可变参数
+def variable_var(*nums):
+	sum = 0
+	for num in nums:
+		sum = sum + num * num
+	return sum
+
+l1=(1,2,3)
+l2=[1,2,3]
+print(variable_var(1,2,3))
+#print(variable_var('1', '2', '3'))
+print(variable_var(*(1,2,3)))
+print(variable_var(*[1,2,3]))
+print(variable_var(*l1))
+print(variable_var(*l2))
+
+#关键字参数
+def key_val_func(name, age, **other):
+	print("name:%s, age:%d" % (name, age))
+	print("other ", other)
+	print("name:", name, 'age:', age, 'other:', other)
+	print("name:%s, age:%d, other:%s" % (name, age, other))
+
+	return
+
+print(key_val_func('abc', 90))
+print(key_val_func('def', 80, gender='male', score=99))
+
+
+#组合参数处理：
+print('组合参数顺序：普通参数（位置参数）> 默认参数 > 可变参数 > 命名关键字参数 > 关键字参数')
+def f1(a, b, c=0, *d, **e):
+	print('a=', a, 'b=', b, 'c=', c, 'd=', d, 'e=', e)
+
+def f2(a, b, c=0, *, d, **e):
+	print('a=', a, 'b=', b, 'c=', c, 'd=', d, 'e=', e)
+
+ll = [1,2,3]
+print(f1(1,2))
+print(f1(1,2,3))
+print(f1(1, 2, c=3))
+print(f1(1,2,3,*ll))
+print(f1(1,2,3,(1,2,3)))
+print(f1(1,2,3,[1,2,3],(4,5,6)))
+print(f1(1,2,3,[1,2,3],(4,5,6),{'key':2, 'value':'456'}))
+print(f1(1,2,3,[1,2,3],(4,5,6),{'key':2, 'value':'456'}, age=90, name='zhg', scoere=99))
+print(f2(1, 2, d=99, ext=None))
+
+
+#切片操作符Slice
+print("切片操作sliece：")
+listq = [1,4,5,6,7,8,9,0]
+listp = range(0, 100, 5)
+tupleq1 = (9,8,7,6,5,4,3,2,1)
+
+print(listq[0:5])
+print(listq[:7])
+print(listq[1:5:2])
+print(listp[-1])
+print(list(listp[-5:-1]))
+print(tupleq1[-3:])
+print(tupleq1[-5:-1:2])
+print(tupleq1[:6:3])
+print(list(listp[::5]))
+print(tupleq1[:])
+print((1,2,3,4,5,6,7,8)[2:5:1])
+print([9,8,7,6,5,4,3,2,1][-8::2])
+print('abcdefghi'[::2])
+
+
+print("迭代操作：")
+d = {'a': 1, 'b': 2, 'c': 3}
+for key in d:
+	print(key)
+	print(d[key])
+
+for val in d.values():
+	print(val)
+
+for k,v in d.items():
+	print('k=', k, ' v=', v)
+
+for key in "ABCabc":
+	print(list(d.values()))
+
+print(d.values())
+print(d.items())
+print([k+" = "+str(v) for k,v in d.items()])
+
+for idx, val in enumerate(['A' ,'B', 'c']):
+	print(idx, " ",  val)
+
+
+print("列表生成式：")
+print(list(range(10)))
+print(list(range(1,20,2)))
+
+L = []
+for x in range(11):
+	L.append(x * x)
+
+print(L)
+
+print(list(x * x for x in range(11)))
+print(list(x * x for x in range(11) if x %2 == 0))
+print([m + n for m in "ABC" for n in "zxy"])
+print([k+" = "+str(v) for k,v in d.items()])
+
+
+import os
+print([d for d in os.listdir('.')])
+for d in os.listdir('.'):
+	print([d])
+
+L = ['Hello', 'World', 18, 'Apple', None]
+print([s.lower() for s in L if isinstance(s, str)])
+
+
+def triangles(n):
+	L = [1,]	
+	while n > 0:
+		yield L
+		L = [1] + [] + [1]
+

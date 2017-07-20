@@ -69,13 +69,17 @@ bool()函数其他类型转化为布尔型，bool(1) bool('')
 #### .尾递归优化：
 Python中可以写（尾递归）：尾递归是把变化的参数传递给递归函数的变量了。
 
-'''python
+```python
   def tailrecsum(x, running_total=0):
    if x == 0:
      return running_total
    else:
      return tailrecsum(x - 1, running_total + x)
-'''
+     
+  def fact(n):
+   return tailrecsum(n, 1)
+```
+
 #### .常用函数：
 |  function name                |     description                                                         |
 |:------------------------------|------------------------------------------------------------------------:|

@@ -154,4 +154,5 @@ Python中可以写（尾递归）：尾递归是把变化的参数传递给递�
 |      iter()                   |     把list、dict、str等Iterable变成Iterator                               |
 | sum()                         |     求和                                                                  |
 |    str(),int(),float()        |      类型转换函数   str(123), int('123'), float('123.189')                 |
+|    filter()                   |   filter()把传入的函数依次作用于每个元素，然后根据返回值是True还是False决定保留还是丢弃该元素|
 

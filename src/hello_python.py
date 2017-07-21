@@ -384,3 +384,110 @@ def triangles(n):
 		yield L
 		L = [1] + [] + [1]
 
+
+
+print("高阶函数:")
+def high_order_func(x,y,abs):
+	return abs(x) + abs(y)
+
+print(high_order_func(-1,-90,abs))
+l1 = [1,2,3,4,5,6,7,8,9,10]
+print(sum(l1))
+
+print("map函数作用于序列中每一个单独元素，readuce函数将序列中每个元素产生关系")
+def map_test(x):
+	return x*x
+
+print(list(map(map_test, l1)))
+print(list(map(str, l1)))
+print(list(map(float, l1)))
+
+from functools import reduce
+def reduce_test(x,y):
+	return x*10+y
+print(reduce(reduce_test, l1))
+
+def fn(x,y):
+	return x*10+y
+
+def char2num(x):
+	return {'0':0, '1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9}[x]
+
+print(reduce(fn, map(char2num, '99876543')))
+print("字符串数字转化成整数")
+def str2num(a):
+	def fun(x,y):
+		return x *10+y
+	
+		
+	return reduce(fun, map(char2num, a))	
+
+print(str2num('998768644'))
+print(int("123456789"))
+
+print("输入字符串的第一个字母转换为大写")
+L1 = ['adam', 'LISA', 'barT']
+def first_2_upper(x):
+	return x[0].upper()+x[1:].lower()
+
+print(list(map(first_2_upper, L1)))
+
+L2 = [3,5,7,9]
+def prod(x,y):
+	return x*y
+print(reduce(prod, L2))
+
+'''
+def str2float(s):
+	def fun1(x,y)
+		return x*10+y
+	def char2num(x):
+		if for m in x if x[m] =='.':
+			yield
+		return {'0':0, '1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9}[x]
+	def add(x,y):
+		x+y
+	return reduce(fun1, map(char2num, s))
+'''
+
+
+print("将字符串转换为浮点数：")
+CHAR_TO_FLOAT = {
+    '0': 0,
+    '1': 1,
+    '2': 2,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8,
+    '9': 9,
+    '.': -1
+}
+
+def str_to_float(s):
+	nums = map(lambda ch:CHAR_TO_FLOAT[ch], s)
+	point = 0
+	def to_float(f, n):
+		nonlocal point
+		if n == -1:
+			point = 1
+			return f
+		if  point == 0:
+			return f* 10 + n
+		else:
+			point = point * 10
+			return f+n/point
+
+	return reduce(to_float, nums, 0.0)
+
+print(str_to_float('123.456'))
+print(str_to_float('.456'))
+
+
+print('filter函数：')
+def is_odd(n):
+	return n %  2 == 1
+
+print(list(filter(is_odd, [1,2,3,4,5,6,7,8,9])))

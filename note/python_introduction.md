@@ -152,3 +152,6 @@ Python中可以写（尾递归）：尾递归是把变化的参数传递给递�
 |   enumerate(list)             |     把一个list变成索引-元素对                                             |
 |      os.listdir('.')          |     列出当前路径下所有文件名称                                             |
 |      iter()                   |     把list、dict、str等Iterable变成Iterator                               |
+| sum()                         |     求和                                                                  |
+|    str(),int(),float()        |      类型转换函数   str(123), int('123'), float('123.189')                 |
+

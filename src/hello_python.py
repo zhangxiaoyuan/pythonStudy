@@ -384,7 +384,84 @@ def triangles(n):
 		yield L
 		L = [1] + [] + [1]
 
+print("生成器有两种方式：1.将列表生成式的[]改成()。2.")
+g = (x*x for x in [1,2,3,4,5,6])
 
+#print(g)
+#print(next(g))
+#print(next(g))
+
+def print_generator():
+	for x in g:
+		print(x)
+
+print_generator()
+
+def fib(max):
+	n, a, b = 0,0,1
+	while n < max:
+		print(b)
+		a,b= b, a+b
+		n = n+1
+	return 'done'
+
+print(fib(6))
+
+def generator_fib(x):
+	n , a, b = 0, 0 , 1
+	while n < x:
+		yield b
+		a, b = b, a+b
+		n = n+1
+	return 'done'
+
+print(generator_fib(6))
+for n in generator_fib(6):
+	print(n)
+
+gg = generator_fib(6)
+while True:
+	try:
+		x = next(gg)
+		print(x)
+	except StopIteration as e:
+		print("return ", e.value)
+		break
+
+def test_gene():
+	yield 1
+	print("step1")
+	print("step2")
+	yield 'AC'
+	print("step3")
+	yield 5
+
+for n in test_gene():
+	print(n)
+
+
+print("杨辉三角：")
+from functools import reduce
+
+def triangles():
+	L =  [1]
+	while True:
+		yield L
+		L = [L[0]] + [L[n] + L[n+1] for n, v in enumerate(L[0:len(L) - 1])] + [L[-1]]
+
+'''
+def triangles():
+    b = [1]
+    while True:
+        yield b
+        b = [1] + [b[i] + b[i+1] for i in range(len(b)-1)] + [1]
+'''
+n = 0
+for x in triangles():
+	print(x)
+	n = n + 1
+	if n == 10:
+		break
 
 print("高阶函数:")
 def high_order_func(x,y,abs):
@@ -491,3 +568,50 @@ def is_odd(n):
 	return n %  2 == 1
 
 print(list(filter(is_odd, [1,2,3,4,5,6,7,8,9])))
+
+
+print('筛选素数：')
+def _odd_iter():
+	n = 1
+	while True:
+		n = n + 2
+		yield n
+
+def _not_divisible(n):
+	return lambda x : x % n > 0
+
+def primies():
+	yield 2
+	it = _odd_iter()
+	while True:
+		n = next(it)
+		yield n
+		it = filter(_not_divisible(n), it)
+
+for n in primies():
+	if n < 20:
+		print(n)
+	else:
+		break
+
+print(next(_odd_iter()))
+
+print("计算回数：")
+
+lk = [1,2,3,4,5]
+print(lk[::-1])
+def is_palindrome1(x):
+	l = list(str(x))
+	for n,v in enumerate(l):
+		if l[n] == l[len(l) - n - 1]:
+			continue
+		else:
+			return
+
+	return x
+
+def is_palindrome(n):
+    return str(n) == str(n)[::-1]
+
+output = filter(is_palindrome, range(1, 1000))
+print(list(output))

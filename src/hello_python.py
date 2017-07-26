@@ -615,3 +615,133 @@ def is_palindrome(n):
 
 output = filter(is_palindrome, range(1, 1000))
 print(list(output))
+
+print("排序函数sorted:")
+print(sorted([36,5,-12,9,-21]))
+print(sorted([36,5,-12,9,-21], key=abs))
+
+L = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]
+def by_name(t):
+	return t[0]
+
+def by_score(t):
+	return t[1]
+
+L2 = sorted(L, key=by_name)
+print(L2)
+print(sorted(L, key=by_name, reverse=True))
+print(sorted(L, key=by_score, reverse=True))
+
+print("函数作为返回值：")
+def lazy_sum(*args):
+    def sum():
+        ax = 0
+        for n in args:
+        	#print(n)
+            ax = ax + n
+        return ax
+    return sum()
+
+print(lazy_sum(1,2,32,3,4,5,6))
+f = lazy_sum(1,2,32,3,4,5,6)
+print(f)
+#print(f())
+
+args = [1,2,3,3,43,4,5]
+for x in args:
+	print(x)
+
+print('闭包特性：牢记：函数只是被创建，但是没有执行，只有在调用时才执行')
+def count():
+	fs = []
+	for i in range(1,4):
+		def abc():
+			return i * i
+
+		fs.append(abc)
+	return fs
+
+f1,f2,f3 = count()
+print(count())
+print(f1())
+print(f2())
+print(f3())
+
+
+def count():
+	fs = []
+	for i in range(1,4):
+		def abc(j):
+			return j * j
+
+		fs.append(abc(i))
+	return fs
+
+#f1,f2,f3 = count()
+#print(f1())
+#print(f2())
+#print(f3())
+f = count()
+print(f)
+
+def count():
+	fs = []
+	for n in range(1,4):
+		def a(i):
+			def b():
+				return i * i
+			return b
+		fs.append(a(n))
+
+	return fs
+
+f1,f2,f3 = count()
+print(f1())
+print(f2())
+print(f3())
+
+print("匿名函数lambda:")
+print(list(map(lambda x: x*x*x, [1,2,3,4,5,6,7,8])))
+
+print("装饰器：")
+def now():
+	print("time:2017-07-26")
+import functools
+
+f = now
+f()
+print(f.__name__)
+
+def log(func):
+	@functools.wraps(func)
+	def wrapper(*args, **kw):
+		print("call %s()" % func.__name__)
+		return func(*args, **kw)
+	return wrapper
+
+@log
+def printData(a, b, c):
+	print('data: 2017-07-26 ', a, b, c)
+
+f = printData
+f(1,2,3)
+print(f.__name__)
+
+def log(text):
+	def decorator(func):
+		@functools.wraps(func)
+		def wrapper(*args, **kw):
+			print("%s %s()" % (text, func.__name__))
+			return func(*args, **kw)
+		return wrapper
+	return decorator
+
+@log("execute")
+def printData(a, b, c):
+	print('data: 2017-07-26 ', a, b, c)
+
+f = printData
+f(2,3,4)
+print(f.__name__)
+print(log.__name__)
+#print(decorator.__name__)

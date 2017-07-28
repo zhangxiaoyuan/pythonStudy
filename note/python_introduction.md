@@ -181,6 +181,18 @@ def count():
  
  因为返回的那个wrapper()函数名字就是'wrapper'，所以，需要把原始函数的__name__等属性复制到wrapper()函数中，否则，有些依赖函数签名的代码执行就会出错。不需要编写wrapper.__name__ = func.__name__这样的代码，Python内置的functools.wraps就是干这个事的，所以，一个完整的decorator的写法如下：
  
+#### 17.偏函数：
+简单总结functools.partial的作用就是，把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数，调用这个新函数会更简单。
+```python
+>>> import functools
+>>> int2 = functools.partial(int, base=2)
+>>> int2('1000000')
+64
+>>> int2('1010101')
+85
+```
+
+
 #### .尾递归优化：
 Python中可以写（尾递归）：尾递归是把变化的参数传递给递归函数的变量了。
 

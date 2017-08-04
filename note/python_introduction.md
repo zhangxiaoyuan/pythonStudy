@@ -204,6 +204,83 @@ def count():
 
 需要注意的是，在Python中，变量名类似\__xxx\__的，也就是以双下划线开头，并且以双下划线结尾的，是特殊变量，特殊变量是可以直接访问的，不是private变量，所以，不能用\__name\__、\__score\__这样的变量名。
 
+#### 19.继承和多态：
+对于Python这样的动态语言来说，则不一定需要传入Animal类型。我们只需要保证传入的对象有一个run()方法就可以了：
+
+```python
+class Timer(object):
+    def run(self):
+        print('Start...')
+```     
+这就是动态语言的“鸭子类型”，它并不要求严格的继承体系，一个对象只要“看起来像鸭子，走起路来像鸭子”，那它就可以被看做是鸭子。
+
+Python的“file-like object“就是一种鸭子类型。对真正的文件对象，它有一个read()方法，返回其内容。但是，许多对象，只要有read()方法，都被视为“file-like object“。许多函数接收的参数就是“file-like object“，你不一定要传入真正的文件对象，完全可以传入任何实现了read()方法的对象。
+
+#### 20.对象信息：
+首先，我们来判断对象类型，使用type()函数：
+断基本数据类型可以直接写int，str等，但如果要判断一个对象是否是函数怎么办？可以使用types模块中定义的常量：
+```pythons
+>>> import types
+>>> def fn():
+...     pass
+...
+>>> type(fn)==types.FunctionType
+True
+>>> type(abs)==types.BuiltinFunctionType
+True
+>>> type(lambda x: x)==types.LambdaType
+True
+>>> type((x for x in range(10)))==types.GeneratorType
+True
+```
+
+对于class的继承关系来说，使用type()就很不方便。我们要判断class的类型，可以使用isinstance()函数。
+```python
+>>> a = Animal()
+>>> d = Dog()
+>>> h = Husky()
+>>> isinstance(d, Dog) and isinstance(d, Animal)
+True
+```
+
+如果要获得一个对象的所有属性和方法，可以使用dir()函数，它返回一个包含字符串的list
+类似__xxx__的属性和方法在Python中都是有特殊用途的，比如__len__方法返回长度。在Python中，如果你调用len()函数试图获取一个对象的长度，实际上，在len()函数内部，它自动去调用该对象的__len__()方法，所以，下面的代码是等价的：
+```python
+>>> len('ABC')
+3
+>>> 'ABC'.__len__()
+3
+```
+
+仅仅把属性和方法列出来是不够的，配合getattr()、setattr()以及hasattr()，我们可以直接操作一个对象的状态：
+```python
+>>> class MyObject(object):
+...     def __init__(self):
+...         self.x = 9
+...     def power(self):
+...         return self.x * self.x
+...
+>>> obj = MyObject()
+```
+紧接着，可以测试该对象的属性：
+```python
+>>> hasattr(obj, 'x') # 有属性'x'吗？
+True
+>>> obj.x
+9
+>>> hasattr(obj, 'y') # 有属性'y'吗？
+False
+>>> setattr(obj, 'y', 19) # 设置一个属性'y'
+>>> hasattr(obj, 'y') # 有属性'y'吗？
+True
+>>> getattr(obj, 'y') # 获取属性'y'
+19
+>>> obj.y # 获取属性'y'
+19
+```
+
+
+
 #### .尾递归优化：
 Python中可以写（尾递归）：尾递归是把变化的参数传递给递归函数的变量了。
 
